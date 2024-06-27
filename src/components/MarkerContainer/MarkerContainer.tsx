@@ -9,6 +9,7 @@ export const MarkerContainer = () => {
       {markers.map((coordinate, index) => (
         <Marker
           key={`${JSON.stringify(coordinate)}, ${index}`}
+          alt={`marker${index}`}
           position={coordinate}
         />
       ))}
