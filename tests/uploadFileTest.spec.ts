@@ -26,11 +26,7 @@ test("upload file", async ({ page }) => {
   const fileChooserPromise = page.waitForEvent("filechooser");
   await page.getByText("Drag 'n' drop some files here").click();
   const fileChooser = await fileChooserPromise;
-  await fileChooser.setFiles(
-    path.join(
-      "C:\\Users\\Alon Lavy\\Desktop\\Personal - Alon\\dev\\maps\\src\\markers.json"
-    )
-  );
+  await fileChooser.setFiles(path.join("./src/markers.json"));
   await page.getByAltText("marker0").click();
-  expect(page.getByText("Marker Located at: 30, 30")).toBeVisible();
+  await expect(page.getByText("Marker Located at: 30, 30")).toBeVisible();
 });
