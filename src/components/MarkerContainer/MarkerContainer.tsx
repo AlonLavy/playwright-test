@@ -1,5 +1,5 @@
 import { useAtomValue } from "jotai";
-import { Marker } from "react-leaflet";
+import { Marker, Popup } from "react-leaflet";
 import { markerFileAtom } from "../Atoms/MarkersFileAtom";
 
 export const MarkerContainer = () => {
@@ -11,7 +11,13 @@ export const MarkerContainer = () => {
           key={`${JSON.stringify(coordinate)}, ${index}`}
           alt={`marker${index}`}
           position={coordinate}
-        />
+        >
+          <Popup>
+            <p>
+              Marker Located at: {coordinate.lat}, {coordinate.lng}
+            </p>
+          </Popup>
+        </Marker>
       ))}
     </>
   );

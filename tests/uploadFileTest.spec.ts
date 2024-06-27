@@ -31,5 +31,6 @@ test("upload file", async ({ page }) => {
       "C:\\Users\\Alon Lavy\\Desktop\\Personal - Alon\\dev\\maps\\src\\markers.json"
     )
   );
-  await expect(page.getByAltText("marker0")).toBeVisible();
+  await page.getByAltText("marker0").click();
+  expect(page.getByText("Marker Located at: 30, 30")).toBeVisible();
 });
