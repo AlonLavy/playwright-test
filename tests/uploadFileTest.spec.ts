@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, Page } from "@playwright/test";
 import path from "path";
 
 // test("has title", async ({ page }) => {
@@ -20,20 +20,23 @@ import path from "path";
 //   ).toBeVisible();
 // });
 
-test("upload file", async ({ page }) => {
-  await page.goto("http://localhost:5173/");
-
+const uploadFile = async (page: Page) => {
   const fileChooserPromise = page.waitForEvent("filechooser");
   await page.getByText("Drag 'n' drop some files here").click();
   const fileChooser = await fileChooserPromise;
   await fileChooser.setFiles(path.join("./src/markers.json"));
+};
+
+test("upload file", async ({ page }) => {
+  await page.goto("http://localhost:5173/");
+
+  await uploadFile(page);
   await page.getByAltText("marker0").click();
   await expect(page.getByText("Marker Located at: 30, 30")).toBeVisible();
 });
 
 test("mui", async ({ page }) => {
   await page.goto("http://localhost:5173/");
-
   await page.getByTestId("textfield").fill("10");
   await expect(page.getByTestId("typography")).toHaveText("100");
 });
