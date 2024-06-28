@@ -30,3 +30,10 @@ test("upload file", async ({ page }) => {
   await page.getByAltText("marker0").click();
   await expect(page.getByText("Marker Located at: 30, 30")).toBeVisible();
 });
+
+test("mui", async ({ page }) => {
+  await page.goto("http://localhost:5173/");
+
+  await page.getByTestId("textfield").fill("10");
+  await expect(page.getByTestId("typography")).toHaveText("100");
+});
